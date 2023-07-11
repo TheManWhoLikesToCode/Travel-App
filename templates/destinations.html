@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ForecastFlyer - Destinations</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>ForecastFlyer</h1>
+      <style>
+        :root {
+          --header-background-image: url({{url_for(
+              "static",
+              filename= "img/SkyLine.jpg"
+            )}});
+        }
+      </style>
+    </header>
+
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('destinations') }}">Destinations</a>
+      <a href="{{ url_for('todo') }}">To Do</a>
+      <a href="{{ url_for('about_us') }}">About Us</a>
+    </nav>
+
+    <section>
+      <h2>Past Destinations</h2>
+      <ul id="destinations-list">
+        <!-- List of destinations will be populated here -->
+      </ul>
+
+      <form id="destination-form">
+        <label for="destination-input">Add a new destination:</label>
+        <input type="text" id="destination-input" name="destination" />
+        <input type="submit" value="Add" />
+      </form>
+    </section>
+
+    <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
+  </body>
+</html>
