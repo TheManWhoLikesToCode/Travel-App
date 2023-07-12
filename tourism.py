@@ -46,7 +46,7 @@ def get_locations_to_explore(destination):
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
 
-    #response = requests.get(url, params=params)
-    #data = response.json()
-    #print(data)
+    response = requests.get(url, params=params)
+    data = response.json()
+    print(data)
 

@@ -26,7 +26,7 @@ data = response.json()
 
 # Access the flight data
 flights = data['data']
-#print(flights)
+print(flights)
 
-for flight in flights:
-    print("This is the departure" , flight['departure']['airport'], " and this is the arrival", flight['arrival']['airport'] )
+#for flight in flights:
+#    print("This is the departure" , flight['departure']['airport'], " and this is the arrival", flight['arrival']['airport'] )
