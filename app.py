@@ -5,26 +5,23 @@ from tourism import get_locations_to_explore
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 
+
 @app.route('/', methods=['GET', 'POST'])
-def home():
+def todo():
+    # Add your logic for todo here
     print(request.form)
     if request.method == 'POST':
         location_search = request.form.get('search')
         print("This is location search", location_search)
         location_list = get_locations_to_explore(location_search)
         print("This is location list", location_list)
-        return render_template("home.html", title="ForecastFlyer", subtitle="Results", results=location_list)
-    return render_template("home.html", title="ForecastFlyer")
-
+        return render_template("todo.html", title="ForecastFlyer", subtitle="Results", results=location_list)
+    return render_template("todo.html", title="ForecastFlyer - To Do")
+    
 @app.route('/destinations', methods=['GET', 'POST'])
 def destinations():
     # Add your logic for destinations here
     return render_template("destinations.html", title="ForecastFlyer - Destinations")
-
-@app.route('/todo', methods=['GET', 'POST'])
-def todo():
-    # Add your logic for todo here
-    return render_template("todo.html", title="ForecastFlyer - To Do")
 
 @app.route('/about_us', methods=['GET'])
 def about_us():
