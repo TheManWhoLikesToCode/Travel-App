@@ -1,52 +1,32 @@
 /* Reset default margins and paddings */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-form,
-ul,
-li {
+body, h1, h2, h3, h4, h5, h6, p, form, ul {
   margin: 0;
   padding: 0;
+}
+
+li{
+  margin: 20px;
+  color: #1c6338fe;
 }
 
 /* Set default font family and color */
 body {
   font-family: Arial, sans-serif;
-  color: #1e2f23; /* Dark green */
+  color: #1e2f23;
 }
 
 /* Header styles */
 header {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space out the logo and navigation */
-  align-items: center; /* Center items vertically */
-  background: linear-gradient(rgba(179, 156, 77, 0.5), rgba(179, 156, 77, 0.5)),
-    var(--header-background-image) no-repeat center center / cover;
+  background-color: #b39c4d;
   color: #fff;
-  padding: 40px; /* Reduce vertical padding, keep horizontal padding */
+  padding: 20px;
+  text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  position: sticky; /* Make the header sticky */
-  top: 0; /* Stick to the top of the page */
-  z-index: 1000; /* Ensure the header is above other elements */
-}
-
-header h1 {
-  margin: 0; /* Remove margin from the logo */
-  font-size: 32px; /* Increase the logo size */
-  text-transform: uppercase; /* Make the logo uppercase */
-  letter-spacing: 2px; /* Add letter spacing to the logo */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for depth */
-  font-family: "Courier New", Courier, monospace; /* Change the font to something more unique */
 }
 
 /* Navigation styles */
 nav {
-  background-color: #1e2f23; /* Olive green */
+  background-color: #768948;
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -60,17 +40,12 @@ nav a {
 }
 
 nav a:hover {
-  color: #b39c4d; /* Gold */
+  color: #b39c4d;
 }
 
 /* Section styles */
 section {
   padding: 20px;
-  background: #f9f9f9; /* Light grey background */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Box shadow for a "lifted" effect */
-  max-width: 800px; /* Limit the width */
-  margin: 20px auto; /* Center the section */
 }
 
 h2 {
@@ -79,8 +54,6 @@ h2 {
 }
 
 form {
-  display: grid; /* Use grid for form layout */
-  grid-gap: 20px; /* Space between form elements */
   margin-top: 20px;
 }
 
@@ -92,7 +65,7 @@ label {
 
 input[type="text"] {
   padding: 10px;
-  width: 90%;
+  width: 100%;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -100,37 +73,35 @@ input[type="text"] {
 
 input[type="submit"] {
   padding: 10px 20px;
-  background: linear-gradient(
-    to right,
-    #607744,
-    #34623f
-  ); /* Gradient from dark green to darker green */
+  background-color: #607744;
   color: #fff;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 5px; /* Rounded corners */
 }
 
 input[type="submit"]:hover {
-  background: linear-gradient(
-    to right,
-    #34623f,
-    #607744
-  ); /* Reverse gradient on hover */
+  background-color: #34623f;
 }
 
 /* Footer styles */
 footer {
-  background-color: #1e2f23; /* Darkest green */
+  background-color: #1e2f23;
   color: #fff;
   padding: 20px;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 .footer-text {
   font-size: 14px;
+}
+
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #b39c4d;
 }
