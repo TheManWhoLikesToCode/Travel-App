@@ -27,7 +27,9 @@ def get_locations_to_explore(destination):
         'lon': dest_lon,  # Replace with the longitude of your destination
         'lat': dest_lat,  # Replace with the latitude of your destination
         'kinds': 'interesting_places',  # Specify the kind of places to retrieve
-        'apikey': api_key
+        'apikey': api_key,
+        'rate': 3,
+        'limit': 20
     }
     try:
         response = requests.get(url, params=params)
@@ -36,6 +38,7 @@ def get_locations_to_explore(destination):
         if 'error' in data:
             error_message = data['error']['message']
             print(f"Error: {error_message}")
+            #return error_message
         else:
             locations = data['features']
             return locations
@@ -43,7 +46,7 @@ def get_locations_to_explore(destination):
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
 
-    response = requests.get(url, params=params)
-    data = response.json()
+    #response = requests.get(url, params=params)
+    #data = response.json()
     #print(data)
 
