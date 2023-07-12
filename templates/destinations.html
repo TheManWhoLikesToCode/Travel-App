@@ -33,7 +33,15 @@
     <section>
       <h2>Past Destinations</h2>
       <ul id="destinations-list">
-        <!-- List of destinations will be populated here -->
+        {% for destination in destinations %}
+        <ul>
+          <h3>Destination ID: {{ destination.id }}</h3>
+          <p>Departure Location: {{ destination.Departure_Location }}</p>
+          <p>Arrival Location: {{ destination.Arrival_Location }}</p>
+          <p>Departure Date: {{ destination.Departure_Date }}</p>
+          <p>Arrival Date: {{ destination.Arrival_Date }}</p>
+        </ul>
+        {% endfor %}
       </ul>
 
       <form id="destination-form" method="POST">

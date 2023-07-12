@@ -1,17 +1,23 @@
+import random
 from flask import Flask, render_template, redirect, url_for, request
 from flask_behind_proxy import FlaskBehindProxy
 from tourism import get_locations_to_explore
 from flask_sqlalchemy import SQLAlchemy
+import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/travel.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(basedir, 'db/travel.db')
 db = SQLAlchemy(app)
 
 
 class Destination(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'destinations'
+    id = db.Column(db.Integer, primary_key=True,
+                   default=lambda: random.randint(1000000, 9999999))
     Departure_Location = db.Column(db.String(80), nullable=False)
     Arrival_Location = db.Column(db.String(80), nullable=False)
     Departure_Date = db.Column(db.String(80), nullable=False)
@@ -33,10 +39,16 @@ def home():
 @app.route('/destinations', methods=['GET', 'POST'])
 def destinations():
     if request.method == 'POST':
-        Departure_Location = request.form.get('Departure_Location')
-        Arrival_Location = request.form.get('Arrival_Location')
-        Departure_Date = request.form.get('Departure_Date')
-        Arrival_Date = request.form.get('Arrival_Date')
+        Departure_Location = request.form.get('from')
+        Arrival_Location = request.form.get('to')
+        Departure_Date = request.form.get('departureDate')
+        Arrival_Date = request.form.get('returnDate')
+
+        # Validate form data
+        if not Departure_Location or not Arrival_Location or not Departure_Date or not Arrival_Date:
+            print("Invalid form data")
+            return redirect(url_for('destinations'))
+
         new_destination = Destination(
             Departure_Location=Departure_Location,
             Arrival_Location=Arrival_Location,
@@ -45,8 +57,13 @@ def destinations():
         )
         db.session.add(new_destination)
         db.session.commit()
+        print(f"New destination added: {new_destination.id}")
         return redirect(url_for('destinations'))
+
     destinations = Destination.query.all()
+    print(f"Retrieved {len(destinations)} destinations from the database:")
+    for destination in destinations:
+        print(f"ID: {destination.id}, Departure: {destination.Departure_Location}, Arrival: {destination.Arrival_Location}, Departure Date: {destination.Departure_Date}, Arrival Date: {destination.Arrival_Date}")
     return render_template("destinations.html", title="ForecastFlyer - Destinations", destinations=destinations)
 
 
@@ -64,6 +81,3 @@ def about_us():
 if __name__ == '__main__':
     app.config['SECRET_KEY'] = "This is a secret key"
     app.run(debug=True, host="0.0.0.0", port=5001)
-
-
-

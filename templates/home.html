@@ -37,21 +37,38 @@
         Start by entering your departure and destination airports (like JFK or
         DTW) along with your travel dates below. Let's get your journey started!
       </p>
-      <form id="flight-search-form">
+      <form
+        id="flight-search-form"
+        method="POST"
+        action="{{ url_for('destinations') }}"
+      >
         <label for="from">From:</label>
-        <input type="text" id="from" name="from" placeholder="Enter origin" />
+        <input
+          type="text"
+          id="from"
+          name="from"
+          placeholder="Enter origin"
+          required
+        />
 
         <label for="to">To:</label>
-        <input type="text" id="to" name="to" placeholder="Enter destination" />
+        <input
+          type="text"
+          id="to"
+          name="to"
+          placeholder="Enter destination"
+          required
+        />
 
         <label for="departureDate">Departure Date:</label>
-        <input type="date" id="departureDate" name="departureDate" />
+        <input type="date" id="departureDate" name="departureDate" required />
 
         <label for="returnDate">Return Date:</label>
-        <input type="date" id="returnDate" name="returnDate" />
+        <input type="date" id="returnDate" name="returnDate" required />
 
         <input type="submit" value="Search" />
       </form>
+
       <div id="results"></div>
     </section>
 
