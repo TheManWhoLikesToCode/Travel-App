@@ -68,7 +68,16 @@
 
         <input type="submit" value="Search" />
       </form>
-
+      <div class="container">
+        <ul>
+          {% if results %} {{subtitle}} {% for result in results %}
+          <li>
+            Departs on {{result.departure.scheduled}} with
+            {{result.airline.name}}
+          </li>
+          {%endfor%} {%endif%}
+        </ul>
+      </div>
       <div id="results"></div>
     </section>
 

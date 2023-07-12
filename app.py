@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_behind_proxy import FlaskBehindProxy
 from tourism import get_locations_to_explore
 from flask_sqlalchemy import SQLAlchemy
+from aviation import get_flight
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -28,16 +29,19 @@ class Destination(db.Model):
 def home():
     print(request.form)
     if request.method == 'POST':
-        location_search = request.form.get('search')
-        print("This is location search", location_search)
-        location_list = get_locations_to_explore(location_search)
-        print("This is location list", location_list)
-        return render_template("home.html", title="ForecastFlyer", subtitle="Results", results=location_list)
+        flight_dep = request.form.get('from')
+        flight_to = request.form.get('to')
+        print("This is departing airport", flight_dep)
+        print("This is arriving airport", flight_to)
+        flight_list = get_flight(flight_dep, flight_to)
+        print("This is flight list", flight_list)
+        return render_template("home.html", title="ForecastFlyer", subtitle="Results " + flight_dep + " to " + flight_to, results=flight_list)
     return render_template("home.html", title="ForecastFlyer")
 
 
 @app.route('/destinations', methods=['GET', 'POST'])
 def destinations():
+    flight_list = None
     if request.method == 'POST':
         Departure_Location = request.form.get('from')
         Arrival_Location = request.form.get('to')
@@ -58,18 +62,29 @@ def destinations():
         db.session.add(new_destination)
         db.session.commit()
         print(f"New destination added: {new_destination.id}")
-        return redirect(url_for('destinations'))
+
+        # Call the get_flight function
+        flight_list = get_flight(Departure_Location, Arrival_Location)
+        print("This is flight list", flight_list)
 
     destinations = Destination.query.all()
     print(f"Retrieved {len(destinations)} destinations from the database:")
     for destination in destinations:
         print(f"ID: {destination.id}, Departure: {destination.Departure_Location}, Arrival: {destination.Arrival_Location}, Departure Date: {destination.Departure_Date}, Arrival Date: {destination.Arrival_Date}")
-    return render_template("destinations.html", title="ForecastFlyer - Destinations", destinations=destinations)
+
+    return render_template("destinations.html", title="ForecastFlyer - Destinations", destinations=destinations, flights=flight_list)
 
 
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
-   # Add your logic for todo here
+    # Add your logic for todo here
+    print(request.form)
+    if request.method == 'POST':
+        location_search = request.form.get('search')
+        print("This is location search", location_search)
+        location_list = get_locations_to_explore(location_search)
+        print("This is location list", location_list)
+        return render_template("todo.html", title="ForecastFlyer", subtitle="Results", results=location_list)
     return render_template("todo.html", title="ForecastFlyer - To Do")
 
 

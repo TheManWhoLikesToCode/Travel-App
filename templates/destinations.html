@@ -31,6 +31,20 @@
     </nav>
 
     <section>
+      <h2>Flight Results</h2>
+      <ul id="flight-results-list">
+        {% if flights %} {% for flight in flights %}
+        <ul>
+          <h3>Flight ID: {{ flight.flight.iata }}</h3>
+          <p>Departure Airport: {{ flight.departure.airport }}</p>
+          <p>Arrival Airport: {{ flight.arrival.airport }}</p>
+          <p>Departure Time: {{ flight.departure.estimated }}</p>
+          <p>Arrival Time: {{ flight.arrival.estimated }}</p>
+        </ul>
+        {% endfor %} {% else %}
+        <ul>No flight results found.</ul>
+        {% endif %}
+      </ul>
       <h2>Past Destinations</h2>
       <ul id="destinations-list">
         {% for destination in destinations %}
@@ -44,21 +58,6 @@
         {% endfor %}
       </ul>
 
-      <form id="destination-form" method="POST">
-        <label for="departure-input">Departure Location:</label>
-        <input type="text" id="departure-input" name="Departure_Location" />
-
-        <label for="arrival-input">Arrival Location:</label>
-        <input type="text" id="arrival-input" name="Arrival_Location" />
-
-        <label for="departure-date-input">Departure Date:</label>
-        <input type="text" id="departure-date-input" name="Departure_Date" />
-
-        <label for="arrival-date-input">Arrival Date:</label>
-        <input type="text" id="arrival-date-input" name="Arrival_Date" />
-
-        <input type="submit" value="Add" />
-      </form>
     </section>
 
     <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>

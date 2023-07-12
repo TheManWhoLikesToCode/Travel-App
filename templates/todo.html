@@ -39,14 +39,14 @@
         </form>
       </section>
 
-      <div class="container">
+      <section>
         <ul>
           {% if results %} {{subtitle}} {% for result in results %}
           <li>{{result.properties.name}}</li>
           {%endfor%} {%endif%}
         </ul>
       </div>
-    </form>
+    </section>
     <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
   </body>
 </html>
