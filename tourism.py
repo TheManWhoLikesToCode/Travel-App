@@ -27,6 +27,7 @@ def get_locations_to_explore(destination: str) -> List[Dict[str, Any]]:
 
     try:
         response = requests.get(GEONAME_API, params=params)
+        print(response)
         data = response.json()
 
         destination_lat = data['lat']
