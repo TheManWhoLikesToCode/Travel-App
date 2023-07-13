@@ -1,5 +1,6 @@
 import requests
 from typing import List, Dict, Any
+from requests.exceptions import RequestException
 
 API_KEY = '5ae2e3f221c38a28845f05b6fabd118a2607fe089a18dc2906b76ddb'
 
@@ -34,7 +35,7 @@ def get_locations_to_explore(destination: str) -> List[Dict[str, Any]]:
         destination_lat = data['lat']
         destination_lon = data['lon']
 
-    except requests.exceptions.RequestException as e:
+    except RequestException as e:
         print(f"Geoname API request failed: {e}")
         return []
 
