@@ -7,11 +7,9 @@ def getForecast(place: str):
     API_key = '544e03ea5ba29e43a20170a9a886f978'
     owm = OWM(API_key)
     weather_mgr = owm.weather_manager()
-    observation = weather_mgr.weather_at_place(place)
 
-    weatherlist = []
     three_h_forecast = weather_mgr.forecast_at_place(place, '3h').forecast
-    nr_of_weathers = len(three_h_forecast)
+
 
     dayslist = []
     weatherlist = []
@@ -127,6 +125,7 @@ app = Flask(__name__)
 # def forecast():  # put application's code here
 #     return render_template("weather.html", len=len(finaldays), finaldays=finaldays, finalforecast=finalforecast)
 
+print(getForecast('Toronto')[0])
 
 if __name__ == '__main__':
     app.run(use_reloader=True, debug=True)

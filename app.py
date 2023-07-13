@@ -2,6 +2,7 @@ import random
 from flask import Flask, render_template, redirect, url_for, request
 from flask_behind_proxy import FlaskBehindProxy
 from tourism import get_locations_to_explore
+from weather import getForecast
 from flask_sqlalchemy import SQLAlchemy
 from aviation import get_flight
 import os
@@ -75,6 +76,15 @@ def destinations():
 
     return render_template("destinations.html", title="ForecastFlyer - Destinations", destinations=destinations, flights=flight_list)
 
+@app.route('/weather', methods=['GET', 'POST'])
+def weather():
+    if request.method == 'POST':
+        destination = request.form.get('destination')
+        if destination:
+            finaldays = getForecast(destination[0])
+            finalforecast = getForecast(destination[1])
+            return render_template("weather.html", len=len(finaldays), finaldays=finaldays, finalforecast=finalforecast)
+    return render_template("weather.html", title="ForecastFlyer - Weather")
 
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
