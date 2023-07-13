@@ -32,32 +32,36 @@
 
     <section>
       <h2>Flight Results</h2>
-      <ul id="flight-results-list">
+      <ul class="list">
         {% if flights %} {% for flight in flights %}
-        <ul>
+        <li>
           <h3>Flight ID: {{ flight.flight.iata }}</h3>
           <p>Departure Airport: {{ flight.departure.airport }}</p>
           <p>Arrival Airport: {{ flight.arrival.airport }}</p>
           <p>Departure Time: {{ flight.departure.estimated }}</p>
           <p>Arrival Time: {{ flight.arrival.estimated }}</p>
-        </ul>
+        </li>
         {% endfor %} {% else %}
-        <ul>No flight results found.</ul>
+        <ul>
+          No flight results found.
+        </ul>
         {% endif %}
       </ul>
+    </section>
+
+    <section>
       <h2>Past Destinations</h2>
-      <ul id="destinations-list">
+      <ul class="list">
         {% for destination in destinations %}
-        <ul>
+        <li>
           <h3>Destination ID: {{ destination.id }}</h3>
           <p>Departure Location: {{ destination.Departure_Location }}</p>
           <p>Arrival Location: {{ destination.Arrival_Location }}</p>
           <p>Departure Date: {{ destination.Departure_Date }}</p>
           <p>Arrival Date: {{ destination.Arrival_Date }}</p>
-        </ul>
+        </li>
         {% endfor %}
       </ul>
-
     </section>
 
     <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>

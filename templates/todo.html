@@ -9,7 +9,6 @@
     />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </head>
-
   <body>
     <header>
       <h1>ForecastFlyer</h1>
@@ -22,7 +21,6 @@
         }
       </style>
     </header>
-
     <nav>
       <a href="{{ url_for('home') }}">Home</a>
       <a href="{{ url_for('destinations') }}">Destinations</a>
@@ -30,22 +28,29 @@
       <a href="{{ url_for('about_us') }}">About Us</a>
     </nav>
 
-    <form method="POST" action="">
-      <section>
-        <form id="destination-form">
-          <label for="destination-input">Enter destination:</label>
-          <input id="search" name="search" type="text" class="form-control" />
-          <button type="submit" class="btn btn-primary btn-lg">Search</button>
-        </form>
-      </section>
-
-      <section>
-        <ul>
-          {% if results %} {{subtitle}} {% for result in results %}
-          <li>{{result.properties.name}}</li>
-          {%endfor%} {%endif%}
-        </ul>
-      </div>
+    <section>
+      <form id ="destination-form" method="POST" action="">
+        <h2>Search Destinations</h2>
+        <p>
+          Enter a city below to see a list of suggested activities and
+          attractions.
+        </p>
+        <label for="destination-input">Destination:</label>
+        <input id="destination" name="destination" type="text" />
+        <input type="submit" value="Search" />
+      </form>
+    </section>
+    <section>
+      <h2>Search Results</h2>
+      <ul class="list">
+        {% if results %} {% for result in results %}
+        <li>
+          <h3>{{result.properties.name}}</h3>
+        </li>
+        {% endfor %} {% else %}
+        <li>No results found</li>
+        {% endif %}
+      </ul>
     </section>
     <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
   </body>

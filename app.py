@@ -77,14 +77,12 @@ def destinations():
 
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
-    # Add your logic for todo here
-    print(request.form)
     if request.method == 'POST':
-        location_search = request.form.get('search')
-        print("This is location search", location_search)
-        location_list = get_locations_to_explore(location_search)
-        print("This is location list", location_list)
-        return render_template("todo.html", title="ForecastFlyer", subtitle="Results", results=location_list)
+        destination = request.form.get('destination')
+        if destination:
+            results = get_locations_to_explore(destination)
+            subtitle = "Results" if results else "No Results Found"
+            return render_template("todo.html", title="ForecastFlyer", subtitle=subtitle, results=results)
     return render_template("todo.html", title="ForecastFlyer - To Do")
 
 

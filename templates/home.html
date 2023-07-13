@@ -1,86 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ForecastFlyer - Home</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/styles.css') }}"
-    />
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-  </head>
-
-  <body>
-    <header>
-      <h1>ForecastFlyer</h1>
-      <style>
-        :root {
-          --header-background-image: url({{url_for(
-              "static",
-              filename= "img/SkyLine.jpg"
+   <head>
+      <title>ForecastFlyer - Home</title>
+      <link
+         rel="stylesheet"
+         type="text/css"
+         href="{{ url_for('static', filename='css/styles.css') }}"
+         />
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+   </head>
+   <body>
+      <header>
+         <h1>ForecastFlyer</h1>
+         <style>
+            :root {
+            --header-background-image: url({{url_for(
+            "static",
+            filename= "img/SkyLine.jpg"
             )}});
-        }
-      </style>
-    </header>
-
-    <nav>
-      <a href="{{ url_for('home') }}">Home</a>
-      <a href="{{ url_for('destinations') }}">Destinations</a>
-      <a href="{{ url_for('todo') }}">To Do</a>
-      <a href="{{ url_for('about_us') }}">About Us</a>
-    </nav>
-
-    <section>
-      <h2>Ready for Your Next Adventure?</h2>
-      <p>
-        Start by entering your departure and destination airports (like JFK or
-        DTW) along with your travel dates below. Let's get your journey started!
-      </p>
-      <form
-        id="flight-search-form"
-        method="POST"
-        action="{{ url_for('destinations') }}"
-      >
-        <label for="from">From:</label>
-        <input
-          type="text"
-          id="from"
-          name="from"
-          placeholder="Enter origin"
-          required
-        />
-
-        <label for="to">To:</label>
-        <input
-          type="text"
-          id="to"
-          name="to"
-          placeholder="Enter destination"
-          required
-        />
-
-        <label for="departureDate">Departure Date:</label>
-        <input type="date" id="departureDate" name="departureDate" required />
-
-        <label for="returnDate">Return Date:</label>
-        <input type="date" id="returnDate" name="returnDate" required />
-
-        <input type="submit" value="Search" />
-      </form>
-      <div class="container">
-        <ul>
-          {% if results %} {{subtitle}} {% for result in results %}
-          <li>
-            Departs on {{result.departure.scheduled}} with
-            {{result.airline.name}}
-          </li>
-          {%endfor%} {%endif%}
-        </ul>
-      </div>
-      <div id="results"></div>
-    </section>
-
-    <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
-  </body>
+            }
+         </style>
+      </header>
+      <nav>
+         <a href="{{ url_for('home') }}">Home</a>
+         <a href="{{ url_for('destinations') }}">Destinations</a>
+         <a href="{{ url_for('todo') }}">To Do</a>
+         <a href="{{ url_for('about_us') }}">About Us</a>
+      </nav>
+      <section>
+         <h2>Ready for Your Next Adventure?</h2>
+         <p>
+            Start by entering your departure and destination airports (like JFK or
+            DTW) along with your travel dates below. Let's get your journey started!
+         </p>
+         <form
+            id="flight-search-form"
+            method="POST"
+            action="{{ url_for('destinations') }}"
+            >
+            <label for="from">From:</label>
+            <input
+               type="text"
+               id="from"
+               name="from"
+               placeholder="Enter origin"
+               required
+               />
+            <label for="to">To:</label>
+            <input
+               type="text"
+               id="to"
+               name="to"
+               placeholder="Enter destination"
+               required
+               />
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" name="departureDate" required />
+            <label for="returnDate">Return Date:</label>
+            <input type="date" id="returnDate" name="returnDate" required />
+            <input type="submit" value="Search" />
+         </form>
+         <div class="container">
+            <ul>
+               {% if results %} {{subtitle}} {% for result in results %}
+               <li>
+                  Departs on {{result.departure.scheduled}} with
+                  {{result.airline.name}}
+               </li>
+               {%endfor%} {%endif%}
+            </ul>
+         </div>
+         <div id="results"></div>
+      </section>
+      <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
+   </body>
 </html>
