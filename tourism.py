@@ -25,9 +25,10 @@ def get_locations_to_explore(destination: str) -> List[Dict[str, Any]]:
         'apikey': API_KEY
     }
 
+    proxy = {'http': 'http://themanwholikestocode.pythonanywhere.com/',
+             'https': 'http://themanwholikestocode.pythonanywhere.com/'}
     try:
-        response = requests.get(GEONAME_API, params=params)
-        print(response)
+        response = requests.get(GEONAME_API, params=params, proxies=proxy)
         data = response.json()
 
         destination_lat = data['lat']
@@ -49,7 +50,7 @@ def get_locations_to_explore(destination: str) -> List[Dict[str, Any]]:
     }
 
     try:
-        response = requests.get(RADIUS_API, params=params)
+        response = requests.get(RADIUS_API, params=params, proxies=proxy)
         data = response.json()
 
         if 'error' in data:
