@@ -34,8 +34,9 @@ def home():
         print("This is departing airport", flight_dep)
         print("This is arriving airport", flight_to)
         flight_list = get_flight(flight_dep, flight_to)
+        subtitle = f"Results {flight_dep} to {flight_to}" if flight_list else "No Results Found"
         print("This is flight list", flight_list)
-        return render_template("home.html", title="ForecastFlyer", subtitle="Results " + flight_dep + " to " + flight_to, results=flight_list)
+        return render_template("home.html", title="ForecastFlyer", subtitle=subtitle, results=flight_list)
     return render_template("home.html", title="ForecastFlyer")
 
 
