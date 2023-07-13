@@ -89,9 +89,12 @@ def weather():
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if request.method == 'POST':
+        print(request.method)
+        print(request.form)
         destination = request.form.get('destination')
         if destination:
             results = get_locations_to_explore(destination)
+            print(results)
             subtitle = "Results" if results else "No Results Found"
             return render_template("todo.html", title="ForecastFlyer", subtitle=subtitle, results=results)
     return render_template("todo.html", title="ForecastFlyer - To Do")
