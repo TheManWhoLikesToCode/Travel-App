@@ -62,7 +62,9 @@ nav a {
 nav a:hover {
   color: #b39c4d; /* Gold */
 }
-
+p {
+  margin-bottom: 10px;
+}
 /* Section styles */
 section {
   padding: 20px;
@@ -72,8 +74,14 @@ section {
   max-width: 800px; /* Limit the width */
   margin: 20px auto; /* Center the section */
 }
+a {
+  color: #607744;
+  font-weight: bold;
+}
 
-
+a:hover {
+  text-decoration: none;
+}
 .list {
   list-style: none;
   padding: 0;
@@ -82,8 +90,8 @@ section {
 .list li {
   background: #f9f9f9;
   padding: 20px;
-  border-radius: 5px; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
