@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ForecastFlyer - Home</title>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+
+</head>
+
+<body>
+<header>
+    <h1>ForecastFlyer</h1>
+    <style>
+        :root {
+          --header-background-image: url({{url_for(
+              "static",
+              filename= "img/SkyLine.jpg"
+            )}});
+        }
+        th:tr{
+		      color: blue;
+
+	      }
+        tr:nth-of-type(2n){
+          border: 1px solid black;
+          background-color: #768948;
+        }
+        td{
+          padding: 8px 8px;
+          border: 3px solid rgb(5, 60, 20);
+        }
+      </style>
+</header>
+
+
+<section>
+    <table style="margin-left: 20px;">
+        <!-- Table headers -->
+        <th>
+            <tr style="color: rgb(255, 255, 255); ">
+                <td>Date</td>
+                <td>Forecast</td>
+            </tr>
+        </th>
+
+        <!-- For loop logic of jinja template -->
+        {%for i in range(0, len)%}
+
+        <!-- table rows -->
+        <tr>
+            <td>{{finaldays[i]}}</td>
+            <td>{{finalforecast[i]}}</td>
+
+            {%endfor%}
+
+        </tr>
+
+    </table>
+
+    <footer>&copy; 2023 ForecastFlyer. All rights reserved.</footer>
+</body>
+</html>
